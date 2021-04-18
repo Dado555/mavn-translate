@@ -1,0 +1,198 @@
+Lexical analysis :
+---------------
+Type:                                  Value:
+--------------------------------------------- 
+[T_MEM]                                  _mem
+[T_M_ID]                                   m1
+[T_NUM]                                     6
+[T_SEMI_COL]                                ;
+[T_MEM]                                  _mem
+[T_M_ID]                                   m2
+[T_NUM]                                     5
+[T_SEMI_COL]                                ;
+[T_REG]                                  _reg
+[T_R_ID]                                   r1
+[T_SEMI_COL]                                ;
+[T_REG]                                  _reg
+[T_R_ID]                                   r2
+[T_SEMI_COL]                                ;
+[T_REG]                                  _reg
+[T_R_ID]                                   r3
+[T_SEMI_COL]                                ;
+[T_REG]                                  _reg
+[T_R_ID]                                   r4
+[T_SEMI_COL]                                ;
+[T_REG]                                  _reg
+[T_R_ID]                                   r5
+[T_SEMI_COL]                                ;
+[T_FUNC]                                _func
+[T_ID]                                   main
+[T_SEMI_COL]                                ;
+[T_LA]                                     la
+[T_R_ID]                                   r4
+[T_COMMA]                                   ,
+[T_M_ID]                                   m1
+[T_SEMI_COL]                                ;
+[T_LW]                                     lw
+[T_R_ID]                                   r1
+[T_COMMA]                                   ,
+[T_NUM]                                     0
+[T_L_PARENT]                                (
+[T_R_ID]                                   r4
+[T_R_PARENT]                                )
+[T_SEMI_COL]                                ;
+[T_LA]                                     la
+[T_R_ID]                                   r5
+[T_COMMA]                                   ,
+[T_M_ID]                                   m2
+[T_SEMI_COL]                                ;
+[T_LW]                                     lw
+[T_R_ID]                                   r2
+[T_COMMA]                                   ,
+[T_NUM]                                     0
+[T_L_PARENT]                                (
+[T_R_ID]                                   r5
+[T_R_PARENT]                                )
+[T_SEMI_COL]                                ;
+[T_OR]                                     or
+[T_R_ID]                                   r4
+[T_COMMA]                                   ,
+[T_R_ID]                                   r1
+[T_COMMA]                                   ,
+[T_R_ID]                                   r2
+[T_SEMI_COL]                                ;
+[T_END_OF_FILE]                           EOF
+
+
+
+Syntax analysis :
+---------------
+Instruction (type:4, position:0)
+m_src: m1 [0] 
+m_dst: r4 [1] 
+m_use: 
+m_def: r4 [1] 
+m_in: 
+m_out: 
+Instruction (type:6, position:1)
+m_src: r4 [1] 
+m_dst: r1 [1] 
+m_use: 
+m_def: r1 [1] 
+m_in: 
+m_out: 
+Instruction (type:4, position:2)
+m_src: m2 [0] 
+m_dst: r5 [1] 
+m_use: 
+m_def: r5 [1] 
+m_in: 
+m_out: 
+Instruction (type:6, position:3)
+m_src: r5 [1] 
+m_dst: r2 [1] 
+m_use: 
+m_def: r2 [1] 
+m_in: 
+m_out: 
+Instruction (type:12, position:4)
+m_src: r1 [1] r2 [1] 
+m_dst: r4 [1] 
+m_use: r1 [1] r2 [1] 
+m_def: r4 [1] 
+m_in: 
+m_out: 
+
+
+
+Liveness analysis :
+---------------
+Instruction (type:4, position:0)
+m_src: m1 [0] 
+m_dst: r4 [1] 
+m_use: 
+m_def: r4 [1] 
+m_in: 
+m_out: 
+Instruction (type:6, position:1)
+m_src: r4 [1] 
+m_dst: r1 [1] 
+m_use: 
+m_def: r1 [1] 
+m_in: 
+m_out: r1 [1] 
+Instruction (type:4, position:2)
+m_src: m2 [0] 
+m_dst: r5 [1] 
+m_use: 
+m_def: r5 [1] 
+m_in: r1 [1] 
+m_out: r1 [1] 
+Instruction (type:6, position:3)
+m_src: r5 [1] 
+m_dst: r2 [1] 
+m_use: 
+m_def: r2 [1] 
+m_in: r1 [1] 
+m_out: r2 [1] r1 [1] 
+Instruction (type:12, position:4)
+m_src: r1 [1] r2 [1] 
+m_dst: r4 [1] 
+m_use: r1 [1] r2 [1] 
+m_def: r4 [1] 
+m_in: r2 [1] r1 [1] 
+m_out: 
+
+
+
+Interference matrix :
+---------------
+	r1	r2	r3	r4	r5
+r1	0	1	0	0	1
+r2	1	0	0	0	0
+r3	0	0	0	0	0
+r4	0	0	0	0	0
+r5	1	0	0	0	0
+
+
+
+Resource allocation :
+---------------
+Instruction (type:4, position:0)
+m_src: m1 [0] 
+m_dst: r4 [1] 
+m_use: 
+m_def: r4 [1] 
+m_in: 
+m_out: 
+Instruction (type:6, position:1)
+m_src: r4 [1] 
+m_dst: r1 [1] 
+m_use: 
+m_def: r1 [1] 
+m_in: 
+m_out: r1 [1] 
+Instruction (type:4, position:2)
+m_src: m2 [0] 
+m_dst: r5 [1] 
+m_use: 
+m_def: r5 [1] 
+m_in: r1 [1] 
+m_out: r1 [1] 
+Instruction (type:6, position:3)
+m_src: r5 [1] 
+m_dst: r2 [1] 
+m_use: 
+m_def: r2 [1] 
+m_in: r1 [1] 
+m_out: r2 [1] r1 [1] 
+Instruction (type:12, position:4)
+m_src: r1 [1] r2 [1] 
+m_dst: r4 [1] 
+m_use: r1 [1] r2 [1] 
+m_def: r4 [1] 
+m_in: r2 [1] r1 [1] 
+m_out: 
+
+
+
